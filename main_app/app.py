@@ -1,7 +1,9 @@
+from graphene import Schema
+from gql.schema import  Query
+from gql.mutation import  Mutation
 from flask import Flask
 from flask_graphql import GraphQLView
 from main_app.db.database import db_session, connection_url
-from main_app.gql.schema import schema
 
 
 app = Flask(__name__)
@@ -10,6 +12,7 @@ app.debug = True
 app.config["SQLALCHEMY_DATABASE_URI"] = connection_url
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+schema = Schema(query=Query, mutation=Mutation)
 
 
 app.add_url_rule(
